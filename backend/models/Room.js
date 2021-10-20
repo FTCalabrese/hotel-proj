@@ -1,17 +1,20 @@
 const {Schema, model} = require('mongoose');
 
+const userSchema = new Schema({
+    googleId: {type: String, required: true, unique: true},
+    name: {type: String, required: true},
+    reservations: [reservationSchema]
+})
+
 const roomSchema = new Schema({
     number: {type: Number, required: true, unique: true},
-    available: {type: Boolean, required: true},
     roomType: {
         type: String,
         required: true,
         enum: ['Suite', 'Basic'],
         default: 'Basic'
     },
-    reservation: {
-        type: [reservationSchema]
-    }
+    reservations: [{type: Schema.Types.ObjectId, ref: 'Reservation'}]
 })
 
 const reservationSchema = new Schema({
@@ -21,5 +24,5 @@ const reservationSchema = new Schema({
     price: {type: Number, required: true}
 })
 
-const Room = mongoose.model('Room', roomSchema, 'rooms');
+const Room = model('Room', roomSchema, 'rooms');
 module.exports = Room;

@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/7a84f28f-7913-408d-a1a2-f1b1b0ba7c6f/resourceGroups/AzureTraining/providers/Microsoft.Web/sites/Hotel-Project-2-Skillstorm",
+    "appService.deploySubpath": "."
+}
