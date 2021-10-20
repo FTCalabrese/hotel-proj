@@ -26,5 +26,3 @@ steps:
     appType: 'webApp'
     WebAppName: 'Hotel-Project-2-Skillstorm'
     packageForLinux: 'build'
-
-- task: PublishBuildArtifacts@1
