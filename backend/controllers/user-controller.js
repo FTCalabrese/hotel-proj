@@ -27,6 +27,10 @@ const createUser = async({googleId, name}) =>{
     try
     {
         await mongoose.connect(process.env.ATLAS_URI);
+
+        const alreadyExists = await User.exists({googleId: googleId});
+        if(alreadyExists) throw {status: 500, error: 'User already exists'};
+
         const customer = new User({googleId, name});
         await customer.save();
 
