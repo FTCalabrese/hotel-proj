@@ -1,4 +1,5 @@
 const express = require('express');
+const passport = require('passport');
 const cors = require('cors');
 require('dotenv').config();
 
@@ -7,6 +8,8 @@ const port = process.env.PORT || 8034;
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 
@@ -15,14 +18,6 @@ app.use(express.urlencoded({extended: true}));
  * Pretty sure these would need to be placed in the React Router DOM front end instead.  
  * Just testing with Google OAuth for now. 
  */
-app.get('/login', (req,res)=> {
-    res.json({location: "login page"});
-})
-
-app.get('/', (req,res)=> {
-    res.json({location: "home page"});
-})
-
 app.get('/auth/google', require('./routes/google-auth.js'));
 
 app.get('/auth/google/callback', require('./routes/google-auth.js'));
