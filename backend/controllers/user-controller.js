@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 const User = require('../models/User.js');
 
-//get all of a users reservations given their googleId
+// get all of a users reservations given their googleId
 const getCustomerReservationsById = async(userId) =>{
     
     try
     {
-        await mongoose.connect(process.env.ATLAS_URI);
+        await mongoose.connect(process.env.COSMO_DB);
         const customer = await User.findOne({googleId: userId});
         if(customer === null) throw {status: 500, error: 'user not found'};
         if(customer.reservations.length === 0) throw {status: 500, error: 'No reservations found'};
@@ -22,10 +22,11 @@ const getCustomerReservationsById = async(userId) =>{
     }
 }
 
-//register a user in the database (initialization)
+// register a user in the database (initialization)
 const createUser = async({googleId, name}) =>{
     try
     {
+
         await mongoose.connect(process.env.ATLAS_URI);
 
         const alreadyExists = await User.findOne({googleId: googleId});

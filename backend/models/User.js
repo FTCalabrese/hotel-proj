@@ -10,7 +10,9 @@ const reservationSchema = new Schema({
 const userSchema = new Schema({
     googleId: {type: String, required: true, unique: true},
     name: {type: String, required: true},
+
     reservations: [{ //TEMP TESTING
+    email: {type: String, required: true},
         room: Number,
         roomtype: String
     }]
