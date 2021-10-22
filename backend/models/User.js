@@ -11,6 +11,7 @@ const reservationSchema = new Schema({
 const userSchema = new Schema({
     googleId: {type: String, required: true, unique: true},
     name: {type: String, required: true},
+    email: {type: String, required: true},
     reservations: [{
         room: Number,
         roomtype: String
