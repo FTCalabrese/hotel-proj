@@ -26,17 +26,50 @@ const getCustomerReservationsById = async(userId) =>{
 const createUser = async({googleId, name}) =>{
     try
     {
-        await mongoose.connect(process.env.COSMO_DB);
+
+        await mongoose.connect(process.env.ATLAS_URI);
+
+        const alreadyExists = await User.findOne({googleId: googleId});
+        if(alreadyExists !== null) 
+        {
+            mongoose.connection.close();
+            return alreadyExists;
+        }
+
         const customer = new User({googleId, name});
         await customer.save();
 
         mongoose.connection.close();
-        return {status: 201, message: `${name} successfully created!`};
+        return customer;
     }
     catch(err)
     {
         mongoose.connection.close();
-        throw {status: 500, error: 'Could not create user'};
+        throw err;
+    }
+}
+
+const createReservation = async({roomId, startDate, endDate}) =>{
+    try
+    {
+        await mongoose.connect(process.env.ATLAS_URI);
+
+        //const price = 
+        //const roomId = 
+        
+        const reservation = new Reservation({roomId, startDate, endDate /*, price*/});
+
+        //await addReservationReferenceToRoom(roomId, reservation._id);
+
+        await reservation.save();
+
+        mongoose.connection.close();
+        return {status: 201, message: `reservation successfully created!`};
+    }
+    catch(err)
+    {
+        mongoose.connection.close();
+        throw {status: 500, error: 'Could not create reservation'};
     }
 }
 

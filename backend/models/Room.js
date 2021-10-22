@@ -8,8 +8,10 @@ const roomSchema = new Schema({
         enum: ['Suite', 'Basic'],
         default: 'Basic'
     },
-    reservations: [{type: Schema.Types.ObjectId, ref: 'Reservation'}]
+    reservations: [{reservationId: {type: Schema.Types.ObjectId, ref: 'Reservation'}}]
 })
 
 const Room = model('Room', roomSchema, 'rooms');
 module.exports = Room;
+
+

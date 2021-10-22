@@ -1,4 +1,5 @@
 node_modules
 .env
-indextest.js
-indextest.html
+index.js
+index.html
+MOCK_DATA.json
