@@ -22,6 +22,7 @@ app.get('/auth/google', require('./routes/google-auth.js'));
 
 app.get('/auth/google/callback', require('./routes/google-auth.js'));
 
+
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 })
